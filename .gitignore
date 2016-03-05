@@ -1,0 +1,16 @@
+node_modules
+npm-debug.log
+**/node_modules
+backstop_data
+builds/**/*.png
+**/*-diff.png
+repo
+design-system
+.DS_Store
+generated
+.backstop
+*.log
+logs
+results
+pids
+current
