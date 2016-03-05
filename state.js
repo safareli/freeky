@@ -1,30 +1,22 @@
 const daggy = require('daggy')
 const {liftF} = require('./free')
 
-const State = daggy.taggedSum({Get: [], Put: ['f']})
-const {Get, Put} = State
+const StateM = daggy.taggedSum({State: ['run']})
+const State = StateM.State
 
-const getState = liftF(Get)
-const putState = x => liftF(Put(x))
-const modifyState = f => getState.chain(x => putState(f(x)))
+StateM.get = liftF(State(s => [s,s]))
+StateM.put = s => liftF(State(_ => [null,s]))
 
-State.of = a => getState.map(b => a)
+StateM.modify = f => State.get.chain(x => State.put(f(x)))
 
-const unState = (m, s) =>
-  m.cata({
-    Get: () => [s, s],
-    Put: z => [null, z]
-  })
+StateM.of = a => State(b => [a, b]);
+State.prototype.chain = function(f) {
+  return State(s => {
+    const [a,b] = this.run(s);
+    return f(a).run(b);
+  });
+};
 
-const runState = (free, s) =>
-  free.cata({
-    Pure: x => [x, s],
-    Impure: (m, q) => {
-      const [x, z] = unState(m, s)
-      return runState(q(x), z)
-    }
-  })
 
-module.exports = { State, runState, getState, putState, modifyState }
-
+module.exports = StateM
 
