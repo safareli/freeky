@@ -76,5 +76,21 @@ const httpToId = m =>
 myFn.foldMap(httpToId, Id.of)
 ```
 
+use it with other monads
+
+```js
+const app = Monad.do(function *() {
+  const page = yield get('/myUrl')
+  const maybeHeader = yield Just($('#header', page))
+  return maybeHeader.chain(h => IO(() => console.log(h)))
+})
+
+const runApp = dispatch([ [IOType, ioToTask],
+                          [Http, httpToTask],
+                          [Maybe, maybeToTask]
+                        ])
+
+runApp.foldMap(httpToTask, Task.of)
+```
 
 
