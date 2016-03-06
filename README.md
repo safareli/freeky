@@ -38,3 +38,43 @@ app.foldMap(runApp, Task.of).fork(console.error, console.log)
 ```
 
 Run with `node --harmony_destructuring example.js`
+
+
+
+## Custom Types
+
+You can define your own types in Free and use them as monads.
+This is useful if you want to define a composable dsl or multiple interpreters for an action:
+
+```js
+const Http = daggy.taggedSum({ Get: ['url'], Post: ['url', 'data'] })
+const {Get, Post} = Http
+
+const get = url => liftF(Get(url))
+const post = (url, data) => liftF(Post(url, data))
+
+var myFn = get('/home').chain(html => post('save', {markup: html})
+
+const httpToTask = m =>
+  m.cata({
+    Get: url => new Task((rej, res) => $.getJSON(url).then(res).error(rej),
+    Post: (url, data) => new Task((rej, res) => $.post(url, data).then(res).error(rej))
+  })
+
+myFn.foldMap(httpToTask, Task.of)
+```
+
+or fake it for testing:
+
+```js
+const httpToId = m =>
+  m.cata({
+    Get: url => Id(`getting ${url}`),
+    Post: (url, data) => Id(`posting ${url} with ${data}`)
+  })
+
+myFn.foldMap(httpToId, Id.of)
+```
+
+
+

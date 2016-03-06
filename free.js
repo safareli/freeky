@@ -5,7 +5,7 @@ const {Impure, Pure} = Free
 
 Free.of = Pure
 
-const kliesli_comp = (f, g) => x => f(x).chain(g)
+const kleisli_comp = (f, g) => x => f(x).chain(g)
 
 Free.prototype.fold = function() {
   return this.x.fold.apply(this.x, arguments)
@@ -19,9 +19,13 @@ Free.prototype.map = function(f) {
   })
 }
 
+Free.prototype.ap = function(a) {
+  return this.chain(f => a.map(f))
+}
+
 Free.prototype.chain = function(f) {
   return this.cata({
-    Impure: (x, g) => Impure(x, kliesli_comp(g, f)),
+    Impure: (x, g) => Impure(x, kleisli_comp(g, f)),
     Pure: x => f(x)
   })
 }
