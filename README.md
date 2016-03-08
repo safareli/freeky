@@ -1,6 +1,16 @@
 # Collection of Free monads
 
+## Install
+
+`npm install freeky`
+
 ## Synopsis
+
+Video series on Free Monads here: https://www.youtube.com/watch?v=WH5BrkzGgQY&list=PLK_hdtAJ4KqUWp5LJdLOgkD_8qKW0iAHi&index=1
+
+Walking through our example.js
+
+Run with `node --harmony_destructuring example.js`
 
 ```js
 
@@ -37,7 +47,6 @@ const runApp = dispatch([ [IOType, ioToTask],
 app.foldMap(runApp, Task.of).fork(console.error, console.log)
 ```
 
-Run with `node --harmony_destructuring example.js`
 
 
 

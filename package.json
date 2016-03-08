@@ -1,13 +1,11 @@
 {
-  "name": "freetests",
-  "version": "1.0.0",
-  "description": "## Synopsis",
-  "main": "cont.js",
+  "name": "freeky",
+  "version": "0.0.1",
+  "description": "Free monad collection",
+  "main": "index.js",
   "dependencies": {
-    "co": "^4.6.0",
     "daggy": "0.0.1",
-    "data.task": "^3.0.0",
-    "fantasy-frees": "^0.1.0"
+    "data.task": "^3.0.0"
   },
   "devDependencies": {},
   "scripts": {
