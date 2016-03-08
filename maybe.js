@@ -9,6 +9,8 @@ const Nothing = liftF(Nothing_)
 
 Maybe.of = Just
 
+Maybe.fromNullable = x => x == undefined ? Nothing : Just(x)
+
 Maybe.prototype.fold = function(f, g) {
   return this.cata({ Just_: f, Nothing_: g })
 }
