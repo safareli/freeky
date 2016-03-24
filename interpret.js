@@ -2,7 +2,7 @@ const id = x => x
 
 const find = (xs, f) => {
   var found;
-  for(x in xs) {
+  for(let x in xs) {
     if(f(xs[x])) {
       found = xs[x]
       break;
