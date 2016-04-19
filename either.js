@@ -1,11 +1,10 @@
 const daggy = require('daggy')
-const {liftF} = require('./free')
+const liftF = require('./free').liftF
 
 const Either = daggy.taggedSum({ Left_: ['x'], Right_: ['x'] })
-const {Left_, Right_} = Either
 
-const Left = x => liftF(Left_(x))
-const Right = x => liftF(Right_(x))
+const Left = x => liftF(Either.Left_(x))
+const Right = x => liftF(Either.Right_(x))
 
 Either.of = Right
 

@@ -13,8 +13,8 @@ const find = (xs, f) => {
 
 const dispatch = pairs =>
   instruction_of_arg => {
-    const interpreter = find(pairs, ([type, inter]) =>
-        instruction_of_arg.constructor === type)[1]
+    const interpreter = find(pairs, xs => // [type, interpreter]
+        instruction_of_arg.constructor === xs[0])[1]
 
     return interpreter(instruction_of_arg)
   }

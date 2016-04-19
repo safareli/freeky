@@ -1,11 +1,11 @@
 {
   "name": "freeky",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Free monad collection",
   "main": "index.js",
   "dependencies": {
     "daggy": "0.0.1",
-    "data.task": "^3.0.0"
+    "data.task": "safareli/data.task.git#patch-1"
   },
   "devDependencies": {},
   "scripts": {

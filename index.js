@@ -5,5 +5,7 @@ module.exports = {
   Cont: require('./cont'),
   State: require('./state'),
   dispatch: require('./interpret'),
-  Monad: require('./monad')
+  Monad: require('./monad'),
+  Free: require('./free'),
+  liftF: require('./free').liftF
 }

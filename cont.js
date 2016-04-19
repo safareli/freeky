@@ -1,6 +1,6 @@
 const daggy = require('daggy')
 const Task = require('data.task')
-const {liftF} = require('./free')
+const liftF = require('./free').liftF
 const ContType = daggy.tagged('t')
 const Cont = f => liftF(ContType((new Task(f))))
 

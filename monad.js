@@ -1,4 +1,4 @@
-const {Free} = require('./free')
+const Free = require('./free').Free
 
 const Monad = {
   do: gen => {

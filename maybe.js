@@ -1,11 +1,10 @@
 const daggy = require('daggy')
-const {liftF} = require('./free')
+const liftF = require('./free').liftF
 
 const Maybe = daggy.taggedSum({ Just_: ['x'], Nothing_: [] })
-const {Just_, Nothing_} = Maybe
 
-const Just = x => liftF(Just_(x))
-const Nothing = liftF(Nothing_)
+const Just = x => liftF(Maybe.Just_(x))
+const Nothing = liftF(Maybe.Nothing_)
 
 Maybe.of = Just
 
