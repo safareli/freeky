@@ -1,3 +1,4 @@
+"use strict"
 const id = x => x
 
 const find = (xs, f) => {
