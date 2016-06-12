@@ -39,6 +39,10 @@ const runApp = dispatch([ [IOType, ioToTask],
                         ])
 
 app.foldMap(runApp, Task.of).fork(console.error, console.log)
+app.foldMap(runApp, Task.of).fork(console.error, console.log)
+app.foldMap(runApp, Task.of).fork(console.error, console.log)
+// 10
+// 10
 // 10
 
 // do syntax is much nicer
