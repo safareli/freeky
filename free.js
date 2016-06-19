@@ -63,4 +63,14 @@ Free.prototype.foldMap = fixDo(function(interpreter, of) {
   })
 })
 
+Free.prototype.mapInstruction = fixDo(function(f) {
+  return this.cata({
+    Pure: value => Free.Pure(value),
+    Impure: (instruction, next) => Free.Impure(
+      f(instruction),
+      (x) => next(x).mapInstruction(f)
+    )
+  })
+})
+
 module.exports = { liftF, Free, IGNORE_VALUE }

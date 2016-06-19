@@ -23,3 +23,19 @@ test('Monad.do', t => {
   )
   t.end()
 })
+
+
+test('mapInstruction', t => {
+  const tree = liftF(1).chain(
+    a => liftF(2).chain(
+      b => Free.of([a,b])
+    )
+  )
+
+  t.deepEqual(
+    tree.mapInstruction((a) => a + 2).foldMap((a) => Identity(a), Identity).x,
+    [3,4],
+    'should add 2 to all instructions in Free'
+  )
+  t.end()
+})
